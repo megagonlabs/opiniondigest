@@ -1,0 +1,38 @@
+{
+    "model": {
+	// "encoder": "transformer",
+	// "decoder": "transformer",
+	"params": {
+	    "d_model": 512,
+	    "nhead": 8,
+	    "num_encoder_layer": 6,
+	    "num_decoder_layer": 6,
+	    "dim_feedforward": 2048,
+	    "dropout": 0.1}
+    },
+    "training": {
+	"loss_func": "cross_entropy",
+	"optimizer": {
+	    "cls": "SGD",
+	    "params": {"lr": 0.1,
+		       "momentum": 0.9,
+		       "nesterov": true}},
+	"scheduler": {
+	    "cls": "StepLR",
+	    "params": {"step_size": 1,
+		       "gamma": 0.1}},
+	"batch_size": 8,
+	"num_epoch": 5,
+	"clipping": 10,
+	"gen_maxlen": 50},
+    // tolerance
+    "metrics": ["rouge_1",
+		"rouge_2",
+		"rouge_l"]
+}
+    
+
+    
+    
+
+ 
