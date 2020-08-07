@@ -154,13 +154,14 @@ rouge_l,0.2938877832779797
 ## Citation
 
 ```
-@misc{suhara2020opiniondigest,
-    title={{OpinionDigest}: A Simple Framework for Opinion Summarization},
-    author={Yoshihiko Suhara and Xiaolan Wang and Stefanos Angelidis and Wang-Chiew Tan},
-    year={2020},
-    eprint={2005.01901},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+@inproceedings{suhara-etal-2020-opiniondigest,
+    title = "{O}pinion{D}igest: A Simple Framework for Opinion Summarization",
+    author = "Suhara, Yoshihiko and Wang, Xiaolan and Angelidis, Stefanos and Tan, Wang-Chiew",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    year = "2020",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.513",
+    doi = "10.18653/v1/2020.acl-main.513",
+    pages = "5789--5798"
 }
 ```
 *The first two authors contributed equally.
