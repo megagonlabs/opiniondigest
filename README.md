@@ -98,9 +98,7 @@ The script generates following three files.
 
 ```
 $ ls data/{p_name}
-train_{a_name}.csv
-dev_{a_name}.csv
-test_{a_name}.csv
+aggregate_{a_name}.csv
 ```
 
 Here `p_name` needs to be specified in the configuration file `aggregate_{a_name}.json`.
@@ -150,6 +148,49 @@ rouge_2,0.1566288226261539
 rouge_l,0.2938877832779797
 ```
 
+### Reproduce results on Yelp dataset
+1. Make sure you download the data and pre-trained model:
+```
+$ ./download.sh
+```
+"yelp.jsonl" contains opinion extractions for 1.038M reviews.
+
+"summaries_0-200_cleaned_fixed_business_ids.csv" contains the [reference summaries](https://s3.us-east-2.amazonaws.com/unsup-sum/summaries_0-200_cleaned.csv) from [MeanSum](https://github.com/sosuperic/MeanSum/tree/a7f45adc6349ae1623ea05c880e70e9f0b14cb1a). Note that we further cleaned the business_ids for easier processing.
+
+"test_gold.csv" contains extractions for reviews in the above annotated reference summaries.
+
+2. Prepare data & train the model (optional).
+You can follow the above instructions to process the data and train thee model, or you can directly used the pre-trained model.
+
+3. Aggregation
+Properly prepare the configuration file, make sure you use ["test_gold.csv"] as the input files and "summaries_0-200_cleaned_fixed_business_ids.csv" as the gold standard summary. 
+
+Example:
+```
+{ 
+  "p_name": "default_yelp", // source directory
+  "files": ["test_gold.csv"], // input files
+  "gold": "summaries_0-200_cleaned_fixed_business_ids.csv", // gold standard summary
+  "embedding": "glove-wiki-gigaword-300", // embedding
+  "threshold": 0.8, // similarity threshold
+  "num_review": 8, // number of reviews to summarize
+  "is_exact": "False", // whether it is ok to have fewer number of reviews
+  "top_k": 10, // top-k extractions to summarize
+  "sentiment": "all", // selection rule for sentiment, "pos"/"neg"/"all", "" means select everything
+  "attribute": "all" // selection rule for attribute, <attr_name>/"all", "" means select everything
+}
+```
+
+Use the following command to aggregate opinions: 
+```
+$ python src/aggregate.py \
+  config/aggregate_{a_name}.json \
+  config/prepare_{p_name}.json \
+  config/train_{t_name}.json
+```
+
+4. Generation & Evaluation
+Follow above steps to generate and evaluate summaries.
 
 ## Citation
 
