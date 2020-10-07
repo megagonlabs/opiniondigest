@@ -21,7 +21,7 @@ $ cd opiniondigest
 $ pip install -r requirements.txt
 ``` 
 
-## (Optional) Data and Pre-trained model
+### (Optional) Data and Pre-trained model
 
 To download data and pre-trained model files, run the command below.
 ```
