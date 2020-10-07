@@ -46,9 +46,10 @@ The script downloads the following files.
     └── yelp-default_op2text_default_OUT_TEXT.field
 ```
 
-- `{train|dev|test}.csv`: Training/development/test data
+- `{train|dev|test}.csv`: Training/development/test data for the reconstruction objective
 - `summaries_0-200_cleaned_fixed_business_ids.csv`: Processed version of gold-standard summaries of the Yelp dataset, originally created by [MeanSum](https://github.com/sosuperic/MeanSum). We fixed a minor issue with business ID.
-- `test_gold_8_15_all_all_300_8.csv`: This file contains input reviews, extractions, and gold-standard summary for each entity.
+- `test_gold.csv`: This file contains input reviews, extractions, and gold-standard summary for each entity.
+- `test_gold_8_15_all_all_300_8.csv`: This file contains aggregated opinion phrases based on `test_gold.csv` using `aggregate.py` (please see below)
 - `yelp.jsonl`: Opinion phrases extracted by by [Snippext](https://github.com/rit-git/Snippext_public) from the Yelp dataset.
 - `model/`: PyTorch checkpoint and "pickled" torchtext files for tokenizer that are used for the experiments in the paper.
 
