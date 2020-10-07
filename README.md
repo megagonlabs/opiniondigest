@@ -46,7 +46,7 @@ The script downloads the following files.
     └── yelp-default_op2text_default_OUT_TEXT.field
 ```
 
-- `{train|dev|test}.csv`: Training/development/test data for the reconstruction objective
+- `{train|dev|test}.csv`: Training/development/test data for `train.py`
 - `summaries_0-200_cleaned_fixed_business_ids.csv`: Processed version of gold-standard summaries of the Yelp dataset, originally created by [MeanSum](https://github.com/sosuperic/MeanSum). We fixed a minor issue with business ID.
 - `test_gold.csv`: This file contains input reviews, extractions, and gold-standard summary for each entity.
 - `test_gold_8_15_all_all_300_8.csv`: This file contains aggregated opinion phrases based on `test_gold.csv` using `aggregate.py` (please see below)
