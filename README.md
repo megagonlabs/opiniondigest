@@ -175,7 +175,7 @@ The script downloads the following files.
 - `summaries_0-200_cleaned_fixed_business_ids.csv`: Processed version of gold-standard summaries of the Yelp dataset, originally created by [MeanSum](https://github.com/sosuperic/MeanSum). We further cleaned the `business_ids` for easier processing. The original data can be found [here](https://s3.us-east-2.amazonaws.com/unsup-sum/summaries_0-200_cleaned.csv).
 - `test_gold.csv`: This file contains input reviews, extractions, and gold-standard summary for each entity.
 - `test_gold_8_15_all_all_300_8.csv`: This file contains aggregated opinion phrases based on `test_gold.csv` using `aggregate.py` (please see below)
-- `yelp.jsonl`: This file contains opinion extractions for 1.038M reviews from the Yelp dataset by [Snippext](https://github.com/rit-git/Snippext_public).
+- `yelp.jsonl`: This file contains opinion extractions for 1.038M reviews from the Yelp dataset (extracted by [Snippext](https://github.com/rit-git/Snippext_public))
 - `model/`: Trained OpinionDigest model (PyTorch checkpoint) and vocabulary files ("pickled" torchtext objects) for tokenizer that are used for the experiments in the paper.
 
 
