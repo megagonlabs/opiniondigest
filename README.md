@@ -21,39 +21,6 @@ $ cd opiniondigest
 $ pip install -r requirements.txt
 ``` 
 
-### (Optional) Data and Pre-trained model
-
-To download data and pre-trained model files, run the command below.
-```
-$ ./download.sh
-```
-
-The script downloads the following files.
-```
-├── data
-│   └── yelp-default
-│       ├── dev.csv
-│       ├── summaries_0-200_cleaned_fixed_business_ids.csv
-│       ├── test.csv
-│       ├── test_gold.csv
-│       ├── test_gold_8_15_all_all_300_8.csv
-│       ├── train.csv
-│       └── yelp.jsonl
-└── model
-    ├── yelp-default_op2text_default.pt
-    ├── yelp-default_op2text_default_ID.field
-    ├── yelp-default_op2text_default_IN_TEXT.field
-    └── yelp-default_op2text_default_OUT_TEXT.field
-```
-
-- `{train|dev|test}.csv`: Training/development/test data for `train.py`
-- `summaries_0-200_cleaned_fixed_business_ids.csv`: Processed version of gold-standard summaries of the Yelp dataset, originally created by [MeanSum](https://github.com/sosuperic/MeanSum). We fixed a minor issue with business ID.
-- `test_gold.csv`: This file contains input reviews, extractions, and gold-standard summary for each entity.
-- `test_gold_8_15_all_all_300_8.csv`: This file contains aggregated opinion phrases based on `test_gold.csv` using `aggregate.py` (please see below)
-- `yelp.jsonl`: Opinion phrases extracted from the Yelp dataset by [Snippext](https://github.com/rit-git/Snippext_public).
-- `model/`: Trained OpinionDigest model (PyTorch checkpoint) and vocabulary files ("pickled" torchtext objects) for tokenizer that are used for the experiments in the paper.
-
-
 ## Preprocessing
 
 To run our framework, you need to preprocess your dataset and extract opinion phrases from the input sentences. You can use any ABSA models to perform the extraction task. 
@@ -176,22 +143,50 @@ rouge_2,0.1566288226261539
 rouge_l,0.2938877832779797
 ```
 
-### Reproduce results on Yelp dataset
-#### Make sure you download the data and pre-trained model:
+## Reproducing Results on the Yelp dataset
+
+### Data and Pre-trained model
+
+Please make sure to download the data and pre-trained model using the following script.
+
 ```
 $ ./download.sh
 ```
-"yelp.jsonl" contains opinion extractions for 1.038M reviews.
 
-"summaries_0-200_cleaned_fixed_business_ids.csv" contains the [reference summaries](https://s3.us-east-2.amazonaws.com/unsup-sum/summaries_0-200_cleaned.csv) from [MeanSum](https://github.com/sosuperic/MeanSum/tree/a7f45adc6349ae1623ea05c880e70e9f0b14cb1a). Note that we further cleaned the business_ids for easier processing.
+The script downloads the following files.
+```
+├── data
+│   └── yelp-default
+│       ├── dev.csv
+│       ├── summaries_0-200_cleaned_fixed_business_ids.csv
+│       ├── test.csv
+│       ├── test_gold.csv
+│       ├── test_gold_8_15_all_all_300_8.csv
+│       ├── train.csv
+│       └── yelp.jsonl
+└── model
+    ├── yelp-default_op2text_default.pt
+    ├── yelp-default_op2text_default_ID.field
+    ├── yelp-default_op2text_default_IN_TEXT.field
+    └── yelp-default_op2text_default_OUT_TEXT.field
+```
 
-"test_gold.csv" contains extractions for reviews in the above annotated reference summaries.
+- `{train|dev|test}.csv`: Training/development/test data for `train.py`
+- `summaries_0-200_cleaned_fixed_business_ids.csv`: Processed version of gold-standard summaries of the Yelp dataset, originally created by [MeanSum](https://github.com/sosuperic/MeanSum). We further cleaned the `business_ids` for easier processing. The original data can be found [here](https://s3.us-east-2.amazonaws.com/unsup-sum/summaries_0-200_cleaned.csv).
+- `test_gold.csv`: This file contains input reviews, extractions, and gold-standard summary for each entity.
+- `test_gold_8_15_all_all_300_8.csv`: This file contains aggregated opinion phrases based on `test_gold.csv` using `aggregate.py` (please see below)
+- `yelp.jsonl`: This file contains opinion extractions for 1.038M reviews from the Yelp dataset by [Snippext](https://github.com/rit-git/Snippext_public).
+- `model/`: Trained OpinionDigest model (PyTorch checkpoint) and vocabulary files ("pickled" torchtext objects) for tokenizer that are used for the experiments in the paper.
 
-#### Prepare data & train the model (optional).
-You can follow the above instructions to process the data and train thee model, or you can directly used the pre-trained model.
 
-#### Aggregation
-Properly prepare the configuration file, make sure you use ["test_gold.csv"] as the input files and "summaries_0-200_cleaned_fixed_business_ids.csv" as the gold standard summary. 
+### Preprocessing & Training (Optional).
+
+You can follow the instructions above to preprocess the data and train an OpinionDigest model by yourself, or you can directly use the pre-trained model.
+
+
+### Aggregation
+
+Properly prepare the configuration file, and make sure you use `test_gold.csv` as the input file and `summaries_0-200_cleaned_fixed_business_ids.csv` as the gold standard summary. 
 
 Example:
 ```
@@ -209,7 +204,7 @@ Example:
 }
 ```
 
-Use the following command to aggregate opinions: 
+Use the following command to aggregate opinion extractions: 
 ```
 $ python src/aggregate.py \
   config/aggregate_{a_name}.json \
@@ -218,7 +213,9 @@ $ python src/aggregate.py \
 ```
 
 #### Generation & Evaluation
-Follow above steps to generate and evaluate summaries.
+
+Follow the steps described above to generate and evaluate summaries.
+
 
 ## Citation
 
