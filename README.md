@@ -149,7 +149,7 @@ rouge_l,0.2938877832779797
 ```
 
 ### Reproduce results on Yelp dataset
-1. Make sure you download the data and pre-trained model:
+#### Make sure you download the data and pre-trained model:
 ```
 $ ./download.sh
 ```
@@ -159,10 +159,10 @@ $ ./download.sh
 
 "test_gold.csv" contains extractions for reviews in the above annotated reference summaries.
 
-2. Prepare data & train the model (optional).
+#### Prepare data & train the model (optional).
 You can follow the above instructions to process the data and train thee model, or you can directly used the pre-trained model.
 
-3. Aggregation
+#### Aggregation
 Properly prepare the configuration file, make sure you use ["test_gold.csv"] as the input files and "summaries_0-200_cleaned_fixed_business_ids.csv" as the gold standard summary. 
 
 Example:
@@ -189,7 +189,7 @@ $ python src/aggregate.py \
   config/train_{t_name}.json
 ```
 
-4. Generation & Evaluation
+#### Generation & Evaluation
 Follow above steps to generate and evaluate summaries.
 
 ## Citation
