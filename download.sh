@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Download data
-wget https://s3.console.aws.amazon.com/s3/object/opiniondigest/data/yelp-default-data.zip
-tar -zvxf yelp-default-data.zip
+wget https://opiniondigest.s3-us-west-2.amazonaws.com/data/yelp-default-data.zip
+unzip yelp-default-data.zip
 rm yelp-default-data.zip
 
 # Download model files
