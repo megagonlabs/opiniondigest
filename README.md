@@ -145,7 +145,7 @@ rouge_l,0.2938877832779797
 
 ## Reproducing Results on the Yelp dataset
 
-### Data and Pre-trained model
+### Downloading Data and Pre-trained model
 
 Please make sure to download the data and pre-trained model using the following script.
 
